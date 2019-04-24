@@ -21,15 +21,20 @@ void imprimeDiasMes(int mes, int ano);
 int totalMes(int mes, int ano);
 
 int main(){
-    for(int i = 1; i <= 12; i++){
-        imprimeCabMes(i);
-        imprimeDiasMes(i,2019);
-        printf("\n\n");
-    }
-    /*while (mes != 0){
-    scanf("%d %d", &mes, &ano);
-    printf("%d", diaInicioMes(mes, ano));
-    }*/
+    int ano = 0;
+    do {
+        printf("0 = Sair\nDigite o ano do calendario: "); 
+        scanf("%d", &ano);
+        for(int i = 1; i <= 12 && ano != 0; i++){
+            imprimeCabMes(i);
+            imprimeDiasMes(i,2019);
+            printf("\n\n");
+        }
+        /*while (mes != 0){
+        scanf("%d %d", &mes, &ano);
+        printf("%d", diaInicioMes(mes, ano));
+        }*/
+    } while (ano != 0);
     return 0;
 }
 
