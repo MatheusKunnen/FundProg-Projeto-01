@@ -1,141 +1,148 @@
 #include <stdio.h>
 #include <math.h>
 
-int ver_operadora(unsigned long int numero);
-int numero_valido(unsigned long int numero);
+int ver_operadora(unsigned long long numero);
+void numero_invalido(unsigned long long numero);
 void operadora(int x);
-int numero_resultante(unsigned long int numero);
-
-main()
+int numero_resultante(unsigned long long numero);
+unsigned long long restoLong(unsigned long long d1, unsigned long long d2);
+int main()
 {
-    int prefixo,x,y;
-    unsigned long int numero;
+    int prefixo, x, y;
+    unsigned long long numero;
     printf("Digite o numero do Cartao: ");
-    scanf("%lu", numero);
-    x=ver_operadora(numero);
-    y=numero_resultante(numero);
-    if(x==0)//NUMERO INVALIDO, CASO 1,2,3
+    scanf("%llu", &numero);
+    x = ver_operadora(numero);
+    //
+    if (x == 0) //NUMERO INVALIDO, CASO 1,2,3
     {
-         numero_invalido(numero);
-
+        numero_invalido(numero);
     }
-    else if(y%10!=0)//CASO 4
+    else
     {
-        printf("Numero de operadora conhecida, mas inv�lido ");
-
+        y = numero_resultante(numero);
+        if(y % 10 != 0) //CASO 4
+            printf("Numero de operadora conhecida, mas invalido ");
+        else //CASO 5
+        {
+            printf("\nNumero valido\nOperadora: ");
+            operadora(x);
+        }
     }
-    else//CASO 5
-    {
-        printf("\nNumero valido\nOperadora: ");
-        operadora(x);
-
-    }
-
-
     return 0;
 }
 
-int ver_operadora(unsigned long int numero)
+int ver_operadora(unsigned long long numero)
 {
-    int x=0;
-    if(numero/(pow(10,15))==51 || numero/(pow(10,15))==55)
+    int x = 0;
+    if (numero / (unsigned long long) (pow(10, 14)) == 51 || numero / (unsigned long long) (pow(10, 14)) == 55)
     {
-        x=1;//Mastercard
+        x = 1; //Mastercard
     }
-    else if(numero/(pow(10,13))==4 || numero/(pow(10,16))==4)
+    else if (numero / (unsigned long long) (pow(10, 12)) == 4 || numero / (unsigned long long) (pow(10, 15)) == 4)
     {
-        x=2;//Visa
+        x = 2; //Visa
     }
-    else if(numero/(pow(10,14))==34 || numero/(pow(10,14))==37)
+    else if (numero / (unsigned long long) (pow(10, 13)) == 34 || numero / (unsigned long long) (pow(10, 13)) == 37)
     {
-        x=3;//Amex
+        x = 3; //Amex
     }
-    else if(numero/(pow(10,15))==30 || numero/(pow(10,15))==36 || numero/(pow(10,15))==38)
+    else if (numero / (unsigned long long) (pow(10, 12)) == 30 || numero / (unsigned long long) (pow(10, 12)) == 36 || numero / (unsigned long long) (pow(10, 12)) == 38)
     {
-        x=4;//Dinnes
+        x = 4; //Dinnes
     }
-    else if(numero/(pow(10,13))==6011)
+    else if (numero / (unsigned long long) (pow(10, 12)) == 6011)
     {
-        x=5;//Discover
+        x = 5; //Discover
     }
-    else if(numero/(pow(10,12))==2014 || numero/(pow(10,12))==2149)
+    else if (numero / (unsigned long long) (pow(10, 11)) == 2014 || numero / (unsigned long long) (pow(10, 11)) == 2149)
     {
-        x=6;//enRoute
+        x = 6; //enRoute
     }
-    else if(numero/(pow(10,16))==3 )
+    else if (numero / (unsigned long long) (pow(10, 15)) == 3)
     {
-        x=7;//JCB
+        x = 7; //JCB
     }
-    else if(numero/(pow(10,12))==2131 || numero/(pow(10,12))==1800)
+    else if (numero / (unsigned long long) (pow(10, 11)) == 2131 || numero / (unsigned long long) (pow(10, 11)) == 1800)
     {
-        x=8;//JCB
+        x = 8; //JCB
     }
     //SE X=0, O NUMERO � INVALIDO.
     return x;
 }
 
-int numero_invalido(unsigned long int numero)
+void numero_invalido(unsigned long long numero)
 {
-     if(((numero/(pow(10,12)))<10) || ((numero/(pow(10,16)))>10))
+        printf("Entro em numero_invalido\n");
+    if (((numero / (unsigned long long) (pow(10, 12))) < 10) || ((numero / (unsigned long long) (pow(10, 16))) > 10))
     {
-        printf("Tamanho incorreto ");//CASO 2
+        printf("Tamanho incorreto "); //CASO 2
     }
-    else if(((numero/(pow(10,12)))>10) && ((numero/(pow(10,16)))<10))
+    else if (((numero / (unsigned long long) (pow(10, 12))) > 10) && ((numero / (unsigned long long) (pow(10, 16))) < 10))
     {
-        prontf("numero de operadoras desconhecidas  ");//CASO 3
+        printf("numero de operadoras desconhecidas  "); //CASO 3
     }
 }
 void operadora(int x)
 {
-    switch(x)
+    switch (x)
     {
-        case 1:
-            printf("Mastercard");
-            break;
-        case 2:
-            printf("Visa");
-            break;
-        case 3:
-            printf("Amex");
-            break;
-        case 4:
-            printf("Diners");
-            break;
-        case 5:
-            printf("Discover");
-            break;
-        case 6:
-            printf("enRoute");
-            break;
-        case 7:
-            printf("JCB");
-            break;
-        case 8:
-            printf("JCB");
-            break;
+    case 1:
+        printf("Mastercard\n");
+        break;
+    case 2:
+        printf("Visa\n");
+        break;
+    case 3:
+        printf("Amex\n");
+        break;
+    case 4:
+        printf("Diners\n");
+        break;
+    case 5:
+        printf("Discover\n");
+        break;
+    case 6:
+        printf("enRoute\n");
+        break;
+    case 7:
+        printf("JCB\n");
+        break;
+    case 8:
+        printf("JCB\n");
+        break;
     }
 }
-int numero_resultante(unsigned long int numero)
+int numero_resultante(unsigned long long numero)
 {
-    int i=0,j=0,r,numero_resultante=0;
-    unsigned long int aux_numero, s;
-    aux_numero=numero;
-    while((aux_numero/10)>9)//quantos algarismos tem o numero
+    //printf("Entro em resultante\n"); //TESTE
+    int i = 0, j = 0, numero_resultante = 0, num;
+    unsigned long long int aux_numero, s, r;
+    aux_numero = numero * 10;
+    while (aux_numero > 0) //Quantos algarismos tem o numero
     {
-       i++;
+        num = aux_numero % 10;
+        //printf("I: %d N: %d\n", i, num); // TESTE
+        if (i % 2 == 0){
+                num = num * 2;
+                if (num >= 10){
+                    num = num % 10 + num / 10;
+                }
+        }
+        numero_resultante += num;
+        aux_numero /= 10;
+        i++;
     }
-    aux_numero=numero;
-    for(j=2;j<=i;j+2)
-    {
-        r=(numero%(pow(10,(i-j))))/(pow(10,j));
-        r=r*2;
-        numero_resultante=numero_resultante+r;//soma algarismos de posi��es pares
-    }
-    for(j=1;j<=i;j+2)
-    {
-        s=(numero%(pow(10,(i-j))))/(pow(10,j));
-        numero_resultante=numero_resultante+s;
-        /*soma a soma dos algarismos pares com os algarismos impares*/
-    }
+    //printf("R: %d\n", numero_resultante); //TESTE
     return numero_resultante;
+}
+
+unsigned long long restoLong(unsigned long long d1, unsigned long long d2)
+{
+    printf("Entrou em resto\n");
+    while (d1 >= d2)
+    {
+        d1 -= d2;
+    }
+    return d1;
 }
