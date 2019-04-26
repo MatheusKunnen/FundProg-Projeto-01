@@ -27,7 +27,7 @@ int main(){
         scanf("%d", &ano);
         for(int i = 1; i <= 12 && ano != 0; i++){
             imprimeCabMes(i);
-            imprimeDiasMes(i,2019);
+            imprimeDiasMes(i, ano);
             printf("\n\n");
         }
         /*while (mes != 0){
@@ -40,46 +40,28 @@ int main(){
 
 // Calcula primeiro dia do mes
 int diaInicioMes(int mes, int ano){
-    int mMes = 0;
-    switch(mes){
-            case 1:
-            mMes = ehBissexto(ano) ? 0 : 0;
-            break;
-        case 2:
-            mMes = ehBissexto(ano) ? 3 : 3;
-            break;
-        case 3:
-            mMes = ehBissexto(ano) ? 3 : 4;
-            break;
-        case 4:
-            mMes = ehBissexto(ano) ? 6 : 0;
-            break;
-        case 5:
-            mMes = ehBissexto(ano) ? 1 : 2;
-            break;
-        case 6:
-            mMes = ehBissexto(ano) ? 4 : 5;
-            break;
-        case 7:
-            mMes = ehBissexto(ano) ? 6 : 0;
-            break;
-        case 8:
-            mMes = ehBissexto(ano) ? 2 : 3;
-            break;
-        case 9:
-            mMes = ehBissexto(ano) ? 5 : 6;
-            break;
-        case 10:
-            mMes = ehBissexto(ano) ? 0 : 1;
-            break;
-        case 11:
-            mMes = ehBissexto(ano) ? 3 : 4;
-            break;
-        case 12:
-            mMes = ehBissexto(ano) ? 5 : 6;
-            break;
+    int dia = 1;
+     switch (mes) {
+        case 1: break;
+        case 2: dia += 31; break;
+        case 3: dia += 59; break;
+        case 4: dia += 90; break;
+        case 5: dia += 120; break;
+        case 6: dia += 151; break;
+        case 7: dia += 181; break;
+        case 8: dia += 212; break;
+        case 9: dia += 243; break;
+        case 10: dia += 273; break;
+        case 11: dia += 304; break;
+        case 12: dia += 334; break;
     }
-    return ((ano - 1) % 7 + ((ano - 1) / 4 - (3 *((ano - 1)/100 + 1) / 4))%7 + mMes + 1)%7;
+    /* Se o ano e um ano-bisexto E
+    Se o mes de fevereiro ja passou entao acrescente um dia ao deslocamento*/
+    if ( ehBissexto(ano) && mes > 2){
+        dia += 1;
+    }
+    dia += (ano-1)*365 + (ano-1)/4 -(ano-1)/100 +(ano-1)/400; 
+    return dia%7;
 }
 
 // Retorna 1 se o ano e bissexto e 0 no caso contrario
