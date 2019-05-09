@@ -11,10 +11,16 @@
                 para determinar se a letra transmitida foi corrompida ou nao. A proposta consiste em alterar este bit mais
                 significativo de tal forma que a soma dos bits seja sempre par (2, 4, 6 or 8)
 */
+
+// recebe uma mensagem e imprime a mesma codificada
 void codificaMensagem();
+// recebe um char por parametro e o codifica em base decimal ASCII
 int codificarLetra(char letra);
+// recebe uma mensagem codificada e retorna a mesma em texto
 void decodificaMensagem();
+// recebe um numero e retorna a letra correspondente se nao estiver corrompido
 char decodificarLetra(int letra);
+// recebe um decimal e retonar a soma dos digitos binarios
 int somaBinario(int dec);
 
 int main()
