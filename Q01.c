@@ -30,10 +30,6 @@ int main(){
             imprimeDiasMes(i, ano);
             printf("\n\n");
         }
-        /*while (mes != 0){
-        scanf("%d %d", &mes, &ano);
-        printf("%d", diaInicioMes(mes, ano));
-        }*/
     } while (ano != 0);
     return 0;
 }
